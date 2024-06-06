@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <style>
+        th{
+            text-align: left;
+            font-weight: normal;
+        }
+        td{
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Details</h1>
+    <h4 id="courseId">Course ID</h4>
+    <div id="courseDetails">?</div>
+</body>
+<script>
+    function show(course){
+        courseDetails.innerHTML = `
+        <table>
+            <tr><th>NAME:</th><td>${course.courseName}</td></tr>
+            <tr><th>Department:</th><td${course.dept}></td></tr>
+            <tr><th>Course Number:</th><td>${course.courseNum}</td></tr>
+            <tr><th>Inscuctor:</th><td>${course.instructor}</td></tr>
+            <tr><th>Start Date:</th><td>${course.startDate}</td></tr>
+            <tr><th>Days:</th><td>${course.numDays}</td></tr>
+            <tr><th>ID:</th><td>${course.id}</td></tr>
+
+
+
+        </table>
+        `;
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id= urlParams.has("id") ? urlParams.get("id") : "-1";
+
+
+    fetch("http://localhost:8081/api/courses/"+id).then(r=>r.json()).then(show);
+</script>
+</html>
